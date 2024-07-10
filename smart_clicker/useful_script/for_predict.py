@@ -8,7 +8,7 @@ import pathlib
 model_path = config.PROJECT_ROOT_PATH / "models"
 
 # model = keras.saving.load_model(model_path / "save_at_25.keras")
-model = keras.saving.load_model(model_path / "save_at_250.keras")
+model = keras.saving.load_model(model_path / "save_at_25.keras")
 image_size = (180, 180)
 
 def predict_single_img(img_path):
