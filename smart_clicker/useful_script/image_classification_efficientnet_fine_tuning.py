@@ -409,19 +409,18 @@ def unfreeze_model(model):
             layer.trainable = True
 
     optimizer = keras.optimizers.Adam(learning_rate=1e-5)
-    callbacks = [
-        keras.callbacks.ModelCheckpoint("save_at_{epoch}.keras"),
-    ]
     model.compile(
         optimizer=optimizer, loss="categorical_crossentropy", metrics=["accuracy"],
-        callbacks=callbacks
     )
 
 
 unfreeze_model(model)
 
 epochs = 4  # @param {type: "slider", min:4, max:10}
-hist = model.fit(ds_train, epochs=epochs, validation_data=ds_test)
+callbacks = [
+    keras.callbacks.ModelCheckpoint("save_at_{epoch}.keras"),
+]
+hist = model.fit(ds_train, epochs=epochs, validation_data=ds_test, callbacks=callbacks)
 plot_hist(hist)
 
 """
