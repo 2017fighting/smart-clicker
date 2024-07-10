@@ -316,7 +316,7 @@ Note that data augmentation and dropout are inactive at inference time.
 """
 
 # img = keras.utils.load_img("PetImages/Cat/6779.jpg", target_size=image_size)
-img = keras.utils.load_img("smart_clicker/frame_data/1/0004.jpg", target_size=image_size)
+img = keras.utils.load_img("smart_clicker/frame_data/1/0051.jpg", target_size=image_size)
 plt.imshow(img)
 
 img_array = keras.utils.img_to_array(img)
