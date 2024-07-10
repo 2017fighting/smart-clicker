@@ -365,6 +365,7 @@ Note that validation accuracy and loss will usually be better than training
 accuracy and loss. This is because the regularization is strong, which only
 suppresses training-time metrics.
 
+
 Note that the convergence may take up to 50 epochs depending on choice of learning rate.
 If image augmentation layers were not
 applied, the validation accuracy may only reach ~60%.
@@ -408,8 +409,12 @@ def unfreeze_model(model):
             layer.trainable = True
 
     optimizer = keras.optimizers.Adam(learning_rate=1e-5)
+    callbacks = [
+        keras.callbacks.ModelCheckpoint("save_at_{epoch}.keras"),
+    ]
     model.compile(
-        optimizer=optimizer, loss="categorical_crossentropy", metrics=["accuracy"]
+        optimizer=optimizer, loss="categorical_crossentropy", metrics=["accuracy"],
+        callbacks=callbacks
     )
 
 
