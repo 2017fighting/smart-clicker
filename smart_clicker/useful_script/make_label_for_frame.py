@@ -5,7 +5,7 @@ from loguru import logger
 
 
 cleaned_frame_data_Path = config.PROJECT_ROOT_PATH / "cleaned_frame_data"
-label_data_path = cleaned_frame_data_Path / "label_data.json"
+label_data_path = config.PROJECT_ROOT_PATH / "label_data.json"
 
 pic_file_path_list = [pic_file for pic_file in cleaned_frame_data_Path.glob('./*')]
 pic_file_path_list.sort()
@@ -16,11 +16,15 @@ def output_json_file():
     with open(label_data_path, 'w') as label_data_f:
         json.dump({str(k.name):v for k,v in file_name_to_label.items()}, label_data_f)
 
+
 def load_json_file():
     with open(label_data_path, 'r') as label_data_f:
         old_label_data = json.load(label_data_f)
     for file_name in file_name_to_label.keys():
+        if file_name.name not in old_label_data:
+            continue
         file_name_to_label[file_name] = old_label_data[file_name.name]
+
 
 def main():
     load_json_file()
@@ -51,6 +55,10 @@ def main():
             exit(0)
         elif key_get == ord('1'):
             file_name_to_label[pic_path] = 1
+            cur_index += 1
+            output_json_file()
+        elif key_get == ord('2'):
+            file_name_to_label[pic_path] = 2
             cur_index += 1
             output_json_file()
         elif key_get == ord('0'):

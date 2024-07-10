@@ -66,7 +66,7 @@ in their header.
 
 frame_data_path = config.PROJECT_ROOT_PATH/ "frame_data"
 num_skipped = 0
-for folder_name in ("1", "0"):
+for folder_name in ("1", "0", '2'):
     folder_path = frame_data_path / folder_name
     for fname in os.listdir(folder_path):
         fpath = os.path.join(folder_path, fname)
@@ -88,7 +88,7 @@ print(f"Deleted {num_skipped} images.")
 """
 
 image_size = (180, 180)
-batch_size = 128
+batch_size = 64
 
 train_ds, val_ds = keras.utils.image_dataset_from_directory(
     "smart_clicker/frame_data",
@@ -323,5 +323,6 @@ img_array = keras.utils.img_to_array(img)
 img_array = keras.ops.expand_dims(img_array, 0)  # Create batch axis
 
 predictions = model.predict(img_array)
-score = float(keras.ops.sigmoid(predictions[0][0]))
-print(f"This image is {100 * (1 - score):.2f}% cat and {100 * score:.2f}% dog.")
+print(predictions)
+# score = float(keras.ops.sigmoid(predictions[0][0]))
+# print(f"This image is {100 * (1 - score):.2f}% cat and {100 * score:.2f}% dog.")
