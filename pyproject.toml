@@ -17,6 +17,8 @@ matplotlib = "^3.9.1"
 pydot = "^2.0.0"
 pydot-ng = "^2.0.0"
 tensorflow-datasets = "^4.9.6"
+scikit-image = "^0.24.0"
+pyautogui = "^0.9.54"
 
 
 [build-system]
